@@ -5,10 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> findMoviesByTitle(String title);
 
-    List<Movie> findDistinctByGenres(Integer genre_id);
+
+
 }

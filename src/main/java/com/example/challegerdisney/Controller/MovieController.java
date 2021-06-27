@@ -35,14 +35,11 @@ public class MovieController {
         movieService.borrar(id);
     }
 
-    @GetMapping("name={nombre}")
-    public List<Movie> buscarXNombre(@PathVariable String nombre) {
-        return movieService.buscarPorNombre(nombre);
+    @GetMapping("name={title}")
+    public List<Movie> buscarXNombre(@PathVariable String title) {
+        return movieService.buscarPorNombre(title);
     }
 
-    @GetMapping("genre={genre_id}")
-    public List<Movie> buscarPorGenero(@PathVariable Integer genre_id) {
-        return movieService.buscarPorGenero(genre_id);
-    }
+
 }
 

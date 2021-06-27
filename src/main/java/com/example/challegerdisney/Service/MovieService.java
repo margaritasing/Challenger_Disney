@@ -34,9 +34,7 @@ public class MovieService {
         return movieRepository.findMoviesByTitle(title);
     }
 
-    public List<Movie> buscarPorGenero(Integer genre_id){
-        return movieRepository.findDistinctByGenres(genre_id);
-    }
+
 
 
 
