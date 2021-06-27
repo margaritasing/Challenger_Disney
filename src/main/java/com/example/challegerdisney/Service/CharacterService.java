@@ -22,7 +22,25 @@ public class CharacterService {
         return personajes;
     }
 
-    public void save(Character personaje) {
-        characterRepository.save(personaje);
+    public Character save(Character personaje) {
+        return characterRepository.save(personaje);
     }
+
+    public void borrar(Integer id) {
+        characterRepository.deleteById(id);
+    }
+
+    public List<Character> buscarPorNombre(String name){
+       return characterRepository.findCharactersByName(name);
+    }
+
+    public List<Character> buscarPorEdad(Integer age){
+        return characterRepository.findCharactersByAge(age);
+    }
+
+    public List<Character> buscarPorIdMovie(Integer id){
+        return characterRepository.findCharactersByMovies(id);
+    }
+
+
 }

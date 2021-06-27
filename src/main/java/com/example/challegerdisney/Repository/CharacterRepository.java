@@ -1,8 +1,10 @@
 package com.example.challegerdisney.Repository;
 
+
 import com.example.challegerdisney.Entity.Character;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
@@ -10,4 +12,10 @@ import java.util.List;
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
 
 
+
+    List<Character> findCharactersByName(String name);
+
+    List<Character>findCharactersByAge(Integer age);
+
+    List<Character> findCharactersByMovies(Integer id);
 }
