@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/movies")
@@ -19,9 +20,14 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping
-    private List<Movie> listarPeliculas() {
+    @GetMapping("/all")
+    public List<Movie> listarPeliculas() {
         return movieService.getMovie();
+    }
+
+    @GetMapping
+    private List<Map<String,String>> listarPelicula(){
+        return movieService.listarMovies();
     }
 
     @PostMapping("/save")

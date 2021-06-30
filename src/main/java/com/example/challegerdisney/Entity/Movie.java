@@ -70,8 +70,6 @@ public class Movie {
                 ", image_url='" + image_url + '\'' +
                 ", year=" + year +
                 ", score=" + score +
-                ", characters=" + characters +
-                ", genres=" + genres +
                 '}';
     }
 }

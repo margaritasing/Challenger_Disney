@@ -59,7 +59,6 @@ public class Genre {
                 "genre_id=" + genre_id +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
-                ", movies=" + movies +
-                '}';
+               '}';
     }
 }

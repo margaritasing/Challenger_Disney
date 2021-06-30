@@ -88,7 +88,6 @@ public class Character {
                 ", age=" + age +
                 ", weight=" + weight +
                 ", story='" + story + '\'' +
-                ", movies=" + movies +
                 '}';
     }
 }
