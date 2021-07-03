@@ -6,10 +6,12 @@ import com.example.challegerdisney.Repository.MovieRepository;
 import com.example.challegerdisney.Service.CharacterService;
 import com.example.challegerdisney.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/character")
@@ -33,9 +35,9 @@ public class CharacterController {
     }
 
     @PostMapping(path="/save",consumes = "application/json")
-    public Character save(@RequestBody Character personaje){
-           characterService.save(personaje);
-           return personaje;
+    public Character save(@RequestBody Character character){
+           characterService.save(character);
+           return character;
     }
 
     @PutMapping("/update")
@@ -47,6 +49,13 @@ public class CharacterController {
     @DeleteMapping("/{id}")
     public void borrar(@PathVariable Integer id){
         characterService.borrar(id);
+    }
+
+    @GetMapping("/find")
+    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+    private List<Character> buscar(@RequestParam Optional<String> name,
+                                   @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> movies){
+        return characterService.findCharacters(name, age, movies);
     }
 
     @GetMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.example.challegerdisney.Service;
 
+import com.example.challegerdisney.Entity.Movie;
 import com.example.challegerdisney.Repository.MovieRepository;
 import com.example.challegerdisney.Entity.Character;
 import com.example.challegerdisney.Repository.CharacterRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CharacterService {
@@ -27,9 +29,6 @@ public class CharacterService {
         return personajes;
     }
 
-    public Character save(Character personaje) {
-        return characterRepository.save(personaje);
-    }
 
     public void borrar(Integer id) {
         characterRepository.deleteById(id);
@@ -54,12 +53,50 @@ public class CharacterService {
         return characterRepository.save(character);
     }
 
+    public Character save(Character character) {
+        if(character.getCharacter_id()!=null) {
+            Character personajeExistente = characterRepository.findById(character.getCharacter_id()).orElse(null);
+            if (personajeExistente != null) {
+                if (character.getName() != null) personajeExistente.setName(character.getName());
+                if (character.getAge() != null) personajeExistente.setAge(character.getAge());
+                if (character.getImage_url() != null) personajeExistente.setImage_url(character.getImage_url());
+                if (character.getStory() != null) personajeExistente.setStory(character.getStory());
+                if (character.getWeight() != null) personajeExistente.setWeight(character.getWeight());
+                return characterRepository.save(personajeExistente);
+            }else character.setCharacter_id(null);
+        }
+        return (character.isGood())?characterRepository.save(character):null;
+    }
+
     public Character getCharacterById(Integer id) {
         Character personaje = characterRepository.findById(id).orElse(null);
-    /*    if(personaje!=null)
-            personaje.setMovies(movieRepository.findMoviesByCharactersEquals(personaje));
-             // TODO agregar pelis*/
-         return personaje;
+        return personaje;
+    }
+
+    public List<Character> findCharacters(Optional<String> name, Optional<Integer> age, Optional<Integer> movies) {
+        try{
+            if(movies.isPresent()) {
+                Movie movie = movieRepository.findById(movies.get()).orElseThrow(Exception::new);
+                if(name.isPresent() && age.isPresent())
+                    return characterRepository.findCharactersByNameContainingAndAgeEqualsAndMoviesContaining(name.get(), age.get(), movie);
+                else if(name.isPresent())
+                    return characterRepository.findCharactersByNameContainingAndMoviesContaining(name.get(), movie);
+                else if(age.isPresent())
+                    return characterRepository.findCharactersByAgeEqualsAndMoviesContaining(age.get(), movie);
+                else
+                    return characterRepository.findCharactersByMoviesContaining(movie);
+            }else {
+                if(name.isPresent() && age.isPresent())
+                    return characterRepository.findCharactersByNameContainingAndAgeEquals(name.get(), age.get());
+                else if(name.isPresent())
+                    return characterRepository.findCharactersByNameContaining(name.get());
+                else if(age.isPresent())
+                    return characterRepository.findCharactersByAgeEquals(age.get());
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
     }
 
 

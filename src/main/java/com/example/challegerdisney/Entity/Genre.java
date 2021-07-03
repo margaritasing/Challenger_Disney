@@ -1,5 +1,7 @@
 package com.example.challegerdisney.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class Genre {
     private Integer genre_id;
     private String name;
     private String image;
-
+    @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "genres_movies",
             joinColumns = @JoinColumn(name = "genre_id"),

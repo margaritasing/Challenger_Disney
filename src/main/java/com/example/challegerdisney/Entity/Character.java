@@ -8,12 +8,12 @@ import java.util.List;
 public class Character {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer character_id;
+    @Column(nullable = false)
     private String name;
     private String image_url;
     private Integer age;
     private Integer weight;
     private String story;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "characters_movies",
             joinColumns = @JoinColumn(name = "character_id"),
@@ -21,6 +21,12 @@ public class Character {
     private List<Movie> movies;
 
     public Character() {
+    }
+
+
+
+    public boolean isGood(){
+        return (name!=null && age!=null && image_url!=null && story!=null && weight!=null);
     }
 
     public Integer getCharacter_id() {

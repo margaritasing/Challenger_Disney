@@ -21,6 +21,9 @@ public class Movie {
 
     public Movie() {
     }
+    public boolean isGood(){
+        return (title!=null && year!=null && image_url!=null && score!=null);
+    }
 
     public Integer getMovie_id() {
         return movie_id;
