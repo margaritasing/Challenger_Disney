@@ -1,16 +1,15 @@
 package com.example.challegerdisney.Controller;
 
-import com.example.challegerdisney.Repository.GenreRepository;
+import com.example.challegerdisney.Service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
 public class GenreController {
-    public final GenreRepository genreRepository;
+    public final GenreService genreService;
 
     @Autowired
-    public GenreController(GenreRepository genreRepository) {
-        this.genreRepository = genreRepository;
+    public GenreController(GenreService genreService) {
+        this.genreService = genreService;
     }
-
 }

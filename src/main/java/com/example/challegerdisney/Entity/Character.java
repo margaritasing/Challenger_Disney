@@ -14,7 +14,7 @@ public class Character {
     private Integer age;
     private Integer weight;
     private String story;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // si hay un error a borrar un personaje con peliculas cambiar la cascadde a Detalles
     @JoinTable(name = "characters_movies",
             joinColumns = @JoinColumn(name = "character_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
